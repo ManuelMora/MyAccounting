@@ -1,0 +1,319 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "e82b35adb1bc09e1dcbfb63f7b1c49a5",
+    "entities": [
+      {
+        "tableName": "cycle",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `start` TEXT NOT NULL, `finish` TEXT, `close` INTEGER NOT NULL DEFAULT 0, `totalIncome` REAL NOT NULL DEFAULT 0, `totalExpenditure` REAL NOT NULL DEFAULT 0, `totalActual` REAL NOT NULL DEFAULT 0)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "start",
+            "columnName": "start",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "finish",
+            "columnName": "finish",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "close",
+            "columnName": "close",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          },
+          {
+            "fieldPath": "totalIncome",
+            "columnName": "totalIncome",
+            "affinity": "REAL",
+            "notNull": true,
+            "defaultValue": "0"
+          },
+          {
+            "fieldPath": "totalExpenditure",
+            "columnName": "totalExpenditure",
+            "affinity": "REAL",
+            "notNull": true,
+            "defaultValue": "0"
+          },
+          {
+            "fieldPath": "totalActual",
+            "columnName": "totalActual",
+            "affinity": "REAL",
+            "notNull": true,
+            "defaultValue": "0"
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "actual",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_cycle` INTEGER NOT NULL, `name` TEXT, `valor` REAL NOT NULL, `description` TEXT, FOREIGN KEY(`id_cycle`) REFERENCES `cycle`(`id`) ON UPDATE NO ACTION ON DELETE RESTRICT )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cycleId",
+            "columnName": "id_cycle",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "valor",
+            "columnName": "valor",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_actual_id_cycle",
+            "unique": false,
+            "columnNames": [
+              "id_cycle"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_actual_id_cycle` ON `${TABLE_NAME}` (`id_cycle`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "cycle",
+            "onDelete": "RESTRICT",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_cycle"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "income",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_cycle` INTEGER NOT NULL, `id_actual` INTEGER NOT NULL, `name` TEXT, `value` REAL NOT NULL, `description` TEXT, FOREIGN KEY(`id_cycle`) REFERENCES `cycle`(`id`) ON UPDATE NO ACTION ON DELETE RESTRICT , FOREIGN KEY(`id_actual`) REFERENCES `actual`(`id`) ON UPDATE NO ACTION ON DELETE RESTRICT )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cycleId",
+            "columnName": "id_cycle",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "actualId",
+            "columnName": "id_actual",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "value",
+            "columnName": "value",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_income_id_cycle",
+            "unique": false,
+            "columnNames": [
+              "id_cycle"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_income_id_cycle` ON `${TABLE_NAME}` (`id_cycle`)"
+          },
+          {
+            "name": "index_income_id_actual",
+            "unique": false,
+            "columnNames": [
+              "id_actual"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_income_id_actual` ON `${TABLE_NAME}` (`id_actual`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "cycle",
+            "onDelete": "RESTRICT",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_cycle"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "actual",
+            "onDelete": "RESTRICT",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_actual"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "expenditure",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_actual` INTEGER NOT NULL, `id_cycle` INTEGER NOT NULL, `name` TEXT, `value` REAL NOT NULL, `description` TEXT, FOREIGN KEY(`id_cycle`) REFERENCES `cycle`(`id`) ON UPDATE NO ACTION ON DELETE RESTRICT , FOREIGN KEY(`id`) REFERENCES `actual`(`id`) ON UPDATE NO ACTION ON DELETE RESTRICT )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "actualId",
+            "columnName": "id_actual",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cycleId",
+            "columnName": "id_cycle",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "value",
+            "columnName": "value",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_expenditure_id_actual",
+            "unique": false,
+            "columnNames": [
+              "id_actual"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_expenditure_id_actual` ON `${TABLE_NAME}` (`id_actual`)"
+          },
+          {
+            "name": "index_expenditure_id_actual",
+            "unique": false,
+            "columnNames": [
+              "id_actual"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_expenditure_id_actual` ON `${TABLE_NAME}` (`id_actual`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "cycle",
+            "onDelete": "RESTRICT",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_cycle"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "actual",
+            "onDelete": "RESTRICT",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e82b35adb1bc09e1dcbfb63f7b1c49a5')"
+    ]
+  }
+}
