@@ -1,4 +1,4 @@
-package mvvm.prueba.myaccounting.database;
+package mvvm.prueba.myaccounting.database.Dao;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -7,6 +7,8 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import java.util.List;
+
+import mvvm.prueba.myaccounting.database.Entity.CycleEntity;
 
 @Dao
 public interface CycleDao {

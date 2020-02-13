@@ -1,4 +1,4 @@
-package mvvm.prueba.myaccounting.database;
+package mvvm.prueba.myaccounting.database.Entity;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
