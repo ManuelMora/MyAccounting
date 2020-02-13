@@ -21,7 +21,7 @@ public class ActualEntity implements Actual {
   @PrimaryKey(autoGenerate = true)
   private int id;
   @ColumnInfo(name = "id_cycle")
-  private int idCycle;
+  private int cycleId;
   private String name;
   private double valor;
   private String description;
@@ -36,12 +36,12 @@ public class ActualEntity implements Actual {
   }
 
   @Override
-  public int getIdCycle() {
-    return idCycle;
+  public int getCycleId() {
+    return cycleId;
   }
 
-  public void setIdCycle(int idCycle) {
-    this.idCycle = idCycle;
+  public void setCycleId(int cycleId) {
+    this.cycleId = cycleId;
   }
 
   @Override
