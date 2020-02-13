@@ -2,6 +2,7 @@ package mvvm.prueba.myaccounting.database.Dao;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
+import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
@@ -13,6 +14,9 @@ import mvvm.prueba.myaccounting.database.Entity.ActualEntity;
 public interface ActualDao {
   @Query("SELECT * FROM actual WHERE id_cycle = :idCycle")
   List<ActualEntity> getActualsByCycle(int idCycle);
+
+  @Insert
+  void insert(ActualEntity actual);
 
   @Update
   void update(ActualEntity actual);
