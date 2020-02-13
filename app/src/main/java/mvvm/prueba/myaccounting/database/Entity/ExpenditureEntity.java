@@ -19,7 +19,7 @@ foreignKeys = {
     childColumns = "id",
     onDelete = ForeignKey.RESTRICT)
 }, indices = {
-    @Index(value = "id_actual"),
+    @Index(value = "id_cycle"),
     @Index(value = "id_actual")
 })
 public class ExpenditureEntity implements Expenditure {
