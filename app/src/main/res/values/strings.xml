@@ -13,4 +13,14 @@
     <string name="menu_currents">Currents</string>
     <string name="menu_incomes">Incomes</string>
     <string name="configuration">Configuration</string>
+
+    <string name="money_value">$%1$.2f</string>
+
+    <!-- Cycle information -->
+    <string name="start">Start</string>
+    <string name="total_expenditure">Total Expenditure</string>
+    <string name="total_current">Total Current</string>
+    <string name="total_income">Total Income</string>
+    <string name="_0">$0</string>
+    <string name="close">Close</string>
 </resources>
